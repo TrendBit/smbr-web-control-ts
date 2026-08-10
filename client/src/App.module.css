@@ -37,8 +37,10 @@
     background: var(--bg-color-2);
     position: relative;
 }
+.sidebar_separator{
+    flex: 1 1 auto;
+}
 .debug{
-    position: absolute;
     width: 100%;
     bottom: 2px;
     text-align: center;
@@ -144,6 +146,18 @@ li{
     border: none;
     height: 100%;
     padding: 0;
+}
+
+.rest_version{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    
+    *{
+        color: var(--bg-color-5);
+    }
 }
 
 

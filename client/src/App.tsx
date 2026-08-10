@@ -1,4 +1,4 @@
-import { createSignal, For, Show, type Accessor, type JSXElement } from 'solid-js'
+import { createEffect, createSignal, For, Show, type Accessor, type JSXElement } from 'solid-js'
 import './common/web-components/css/colors.css'
 import './common/web-components/css/global.css'
 import "./components/Icon/iconFont.css"
@@ -13,11 +13,13 @@ import { Scripts } from './panels/scripts/Scripts'
 import { Config } from './panels/config/Config'
 import { Device } from './panels/device/Device'
 import { Hotbar } from './panels/hotbar/Hotbar'
-import { RefreshProvider } from './common/web-components/other/RefreshProvider'
+import { RefreshProvider, refreshValueUpdate, useRefreshContext } from './common/web-components/other/RefreshProvider'
 import { isDebug } from './components/debug/debugFlag'
 import { DebugApiMessageHostnameEditor, DebugModuleEditor, DebugRefreshProviderInterval } from './components/debug/Debug'
 import { ModuleListProvider, ModuleListRefresher } from './components/other/ModuleListProvider'
 import { AutoScrollerP } from './common/web-components/AutoScroller/AutoScroller'
+import { ValueDisplay } from './common/web-components/ValueDisplay/ValueDisplay'
+import { System } from './apiMessages/system/_'
 
 type ItemProps = { text: string; iconName: Icons, active: Accessor<string>, onClick?: ()=>void};
 
@@ -80,6 +82,42 @@ function Panels(props: PanelsProps){
 }
 
 
+
+interface VersionNumberProps {
+    class?: string
+}
+
+export function VersionNumber(props: VersionNumberProps) {
+    const [version, setVersion] = createSignal<string | undefined>(undefined)
+    const [err, setErr] = createSignal<boolean>(false)
+
+    const refreshCntxt = useRefreshContext()
+    let lastUpdate = 0
+    
+    createEffect(async () => {
+        if (!refreshValueUpdate(refreshCntxt?.listen(), {lastUpdate: lastUpdate, length:30000})) {
+            return
+        }
+        try {
+            let response = await System.sendVersion()
+            setVersion(response.version)
+            setErr(false)
+        } catch (error) {
+            setErr(true)
+            setVersion(undefined)
+            throw error
+        }
+    })
+    
+    return (
+        <div class={props.class} classList={{[styles.rest_version]:true}}>
+            <p>REST version:</p>
+            <ValueDisplay value={version()} error={err()}></ValueDisplay>
+        </div>
+    )
+}
+
+
 function App() {
    const [activeItem, setActiveItem] = createSignal("Dashboard");
    
@@ -120,6 +158,7 @@ function App() {
                            onClick={() => setActiveItem(item.text)}
                         />
                      ))}
+                     <div class={styles.sidebar_separator}></div>
                      <Show when={isDebug}>
                         <div class={styles.debug}>
                            <button onclick={e=>e.currentTarget.parentElement?.classList.toggle(styles.collapsed)}>Debug mode</button>
@@ -149,6 +188,7 @@ function App() {
                            ></DebugRefreshProviderInterval>
                         </div>
                      </Show>
+                     <VersionNumber></VersionNumber>
                   </ul>
                   <Panels 
                      items={items}
