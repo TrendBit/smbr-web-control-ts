@@ -4,7 +4,6 @@ import express from 'express';
 import chalk from 'chalk';
 import cors from 'cors';
 import { configFilesRouter } from './config-endpoints.js';
-import { serviceStatusRouter } from './service-status.js';
 import { TempLogger } from './temperature-history.js';
 import fs from 'fs';
 import { isNumber, isString } from './utils.js';
@@ -112,7 +111,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(distPath));
 app.use('/config-files', configFilesRouter);
-app.use('/services-status', serviceStatusRouter);
 app.use('/temperature-logs', tempLogger.router);
 app.use('/time',timeModulesRouter);
 
