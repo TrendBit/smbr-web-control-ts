@@ -7,6 +7,8 @@ import styles from "./ServiceStatus.module.css"
 import { ServicesStatus  as ServicesStatusNamespace} from "../../apiMessages/services-status/_"
 import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider"
 import { AutoScrollerP } from "../../common/web-components/AutoScroller/AutoScroller"
+import { timeElapsedString } from "../../common/web-components/other/utils"
+import { Time } from "../../apiMessages/time/_"
 
 interface ServiceStatusProps{
     id:string
@@ -19,7 +21,20 @@ type row= {
     state: string,
     stateType : ServicesStatusNamespace.stateTypes
     name: string,
-    stateDuration : string
+    stateSince : Date
+}
+
+function getStateDuration(sinceTime : Date, deviceTime : Date | undefined) {
+    if (deviceTime) {
+        let roundedTime = deviceTime.getTime() - sinceTime.getTime() 
+        roundedTime = roundedTime - (roundedTime % 1000)
+        if (roundedTime < 0) {
+            return "---"
+        }
+        return timeElapsedString(roundedTime,{maxTimeStrings: 2, excludeLabel: true})
+    } else {
+        return "---"
+    }
 }
 
 function renderRow(value : row, index : number){
@@ -40,8 +55,8 @@ function renderRow(value : row, index : number){
             [state]:true,
             [styles.service_status]:true
         }}>{value.state}</p>,
-        <AutoScrollerP value={value.name}></AutoScrollerP>,
-        <AutoScrollerP value={value.stateDuration}></AutoScrollerP>
+        <AutoScrollerP value={value.name.slice(0,-8)}></AutoScrollerP>,
+        <AutoScrollerP value={getStateDuration(value.stateSince,Time.deviceTime())}></AutoScrollerP>
     ])
 }
 
@@ -60,8 +75,8 @@ export function ServicesStatusBody(props : ServiceStatusBodyProps){
             for(let service of result.services){
                 newRows.push({
                     name: service.name,
-                    stateDuration: service.uptime,
-                    state: service.state,
+                    stateSince: service.since,
+                    state: service.activeState,
                     stateType: service.stateType
                 })
             }
@@ -81,7 +96,7 @@ export function ServicesStatusBody(props : ServiceStatusBodyProps){
         <TableStatic
             data={rows()}
             headers={["state","service name","in this state for"]}
-            colSizes={["80px",undefined,"70px"]}
+            colSizes={["80px",undefined,"120px"]}
             renderRow={renderRow}
             fillHeight={true}
         ></TableStatic>
