@@ -1,5 +1,5 @@
 import { moduleInstances, moduleTypes, type moduleInstancesType, type moduleTypesType } from "../../components/other/ModuleListProvider";
-import { checkArray, checkNumber, checkString, checkStringEnum, checkTimestamp, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
+import { checkArray, checkBoolean, checkNumber, checkString, checkStringEnum, checkTimestamp, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
 
 export namespace System{
 
@@ -129,5 +129,31 @@ export namespace System{
         })
 
         return data;
+    }
+
+
+    export type versionResult = {
+        version: string,
+        hash: string,
+        dirty: boolean
+    }
+
+    export async function sendVersion(): Promise<versionResult>{
+        let opts: apiMessageOptions = {
+            url: "/system/version"
+        }
+
+        let response = await sendJsonApiMessage(opts);
+        let data = response.jsonValue;
+
+        checkString(data, "version", opts);
+        checkString(data, "hash", opts);
+        checkBoolean(data, "dirty", opts);
+
+        return {
+            version: data.version,
+            hash: data.hash,
+            dirty: data.dirty
+        }
     }
 }
