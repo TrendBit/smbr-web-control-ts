@@ -1,38 +1,71 @@
-import { checkArray, checkString, checkStringEnum, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
+import { checkArray, checkBoolean, checkNull, checkNumber, checkString, checkStringEnum, checkTimestamp, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
 
 export namespace ServicesStatus{
     export type stateTypes =  "ok" | "problem" | "critical-problem"
 
+    export type serviceStatus = {
+        name : string,
+        loadState : string,
+        activeState : string,
+        subState : string,
+        enabled : boolean,
+        mainPid : number,
+        since : Date,
+        stateType: stateTypes
+    }
+        
     export type servicesStatusResult = {
-        services: {
-            name: string,
-            uptime: string,
-            state : string,
-            stateType : stateTypes
-        }[]
+        services: serviceStatus[]
     }
 
     export async function sendServicesStatus() : Promise<servicesStatusResult>{
         let opts : apiMessageOptions = {
-            url: "/services-status",
-            target: "webControlApi"
+            url: "/services",
+            target: "reactorApi"
         }
 
         let result = await sendJsonApiMessage(opts);
-        let data = result.jsonValue;
+        let data = { services: result.jsonValue };
+
+        let parsedData : serviceStatus[] = [];
 
         checkArray(data,"services",(el)=>{
             checkString(el,"name",opts);
-            try {
-                checkString(el,"uptime",opts);
-            } catch (error) {
-                el.uptime = undefined;
+            checkString(el,"load_state",opts);
+            checkString(el,"active_state",opts);
+            checkString(el,"sub_state",opts);
+            checkBoolean(el,"enabled",opts);
+            checkNumber(el,"main_pid",opts);
+            checkTimestamp(el, "since", opts);
+
+            let stateType : stateTypes
+            switch(el.active_state){
+                case "active":
+                    stateType = "ok"
+                    break
+                case "not installed":
+                case "failed":
+                case "inactive":
+                    stateType = "critical-problem"
+                    break
+                default:
+                    stateType = "problem"
             }
-            checkString(el,"state",opts);
-            checkStringEnum(el,"stateType",["ok","problem","critical-problem"],opts);
+
+            parsedData.push({
+                name: el.name,
+                loadState: el.load_state,
+                activeState: el.active_state,
+                subState: el.sub_state,
+                enabled: el.enabled,
+                mainPid: el.main_pid,
+                since: new Date(el.since),
+                stateType: stateType
+            })
+            
             return true;
         },opts);
 
-        return data;
+        return {services: parsedData};
     }
 }
