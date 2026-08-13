@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For, Show, type Accessor, type JSXElement } from 'solid-js'
+import { createEffect, createSignal, For, Show, type Accessor, type JSXElement, type Setter } from 'solid-js'
 import './common/web-components/css/colors.css'
 import './common/web-components/css/global.css'
 import "./components/Icon/iconFont.css"
@@ -20,6 +20,8 @@ import { ModuleListProvider, ModuleListRefresher } from './components/other/Modu
 import { AutoScrollerP } from './common/web-components/AutoScroller/AutoScroller'
 import { ValueDisplay } from './common/web-components/ValueDisplay/ValueDisplay'
 import { System } from './apiMessages/system/_'
+import { ModalWindowProvider, useModalWindow } from './common/web-components/ModalWindow/ModalWindow'
+import { globalModalWindow } from './components/other/GlobalModalWindow'
 
 type ItemProps = { text: string; iconName: Icons, active: Accessor<string>, onClick?: ()=>void};
 
@@ -59,8 +61,8 @@ function Panel(props: PanelProps) {
 
 interface PanelsProps{
    items : {
-      text: string, 
-      iconName: string, 
+      text: string,
+      iconName: string,
       component: ()=>JSXElement
    }[],
    activeItem : string
@@ -76,7 +78,7 @@ function Panels(props: PanelsProps){
                </Panel>
             )}
          </For>
-                  
+
       </div>
    )
 }
@@ -93,7 +95,7 @@ export function VersionNumber(props: VersionNumberProps) {
 
     const refreshCntxt = useRefreshContext()
     let lastUpdate = 0
-    
+
     createEffect(async () => {
         if (!refreshValueUpdate(refreshCntxt?.listen(), {lastUpdate: lastUpdate, length:30000})) {
             return
@@ -108,7 +110,7 @@ export function VersionNumber(props: VersionNumberProps) {
             throw error
         }
     })
-    
+
     return (
         <div class={props.class} classList={{[styles.rest_version]:true}}>
             <p>REST version:</p>
@@ -118,10 +120,21 @@ export function VersionNumber(props: VersionNumberProps) {
 }
 
 
+function GlobalWindowProviderInit() {
+    const modalWindowCntxt = useModalWindow()
+    globalModalWindow.cntxt = modalWindowCntxt
+    return (<></>)
+}
+
+export let mainUpdaterDisabled : {set: (state : boolean) => void, get: ()=>boolean}
 function App() {
    const [activeItem, setActiveItem] = createSignal("Dashboard");
-   
+
    const [updateDisabled, setUpdateDisabled] = createSignal(isDebug);
+   mainUpdaterDisabled = {
+        set: setUpdateDisabled,
+        get: updateDisabled
+   }
    const [updateInterval, setUpdateInterval] = createSignal(5000);
 
 
@@ -135,74 +148,77 @@ function App() {
       { text: "Device", iconName: "terminal", component: Device },
    ];
    return (
-       <>
-         <ModuleListProvider>
-            <RefreshProvider disabled={updateDisabled()} autoRefreshPeriod={updateInterval()}>
-               <header class={styles.hotbar}>
-                  <button class={styles.logo}><img src={Public.images.minilogo} /></button>
-                  <AutoScrollerP
-                     class={styles.title}
-                     value='Smart Modular Photo Bioreactor'
-                  ></AutoScrollerP>
-                  <div class={styles.hotbar_right}>
-                     <Hotbar></Hotbar>
+      <>
+         <ModalWindowProvider>
+            <ModuleListProvider>
+               <GlobalWindowProviderInit></GlobalWindowProviderInit>
+               <RefreshProvider disabled={updateDisabled()} autoRefreshPeriod={updateInterval()}>
+                  <header class={styles.hotbar}>
+                     <button class={styles.logo}><img src={Public.images.minilogo} /></button>
+                     <AutoScrollerP
+                        class={styles.title}
+                        value='Smart Modular Photo Bioreactor'
+                     ></AutoScrollerP>
+                     <div class={styles.hotbar_right}>
+                        <Hotbar></Hotbar>
+                     </div>
+                  </header>
+                  <div class={styles.main}>
+                     <ul class={styles.sidebar}>
+                        {items.map(item => (
+                           <Item
+                              text={item.text}
+                              iconName={item.iconName}
+                              active={activeItem}
+                              onClick={() => setActiveItem(item.text)}
+                           />
+                        ))}
+                        <div class={styles.sidebar_separator}></div>
+                        <Show when={isDebug}>
+                           <div class={styles.debug}>
+                              <button onclick={e=>e.currentTarget.parentElement?.classList.toggle(styles.collapsed)}>Debug mode</button>
+                              <DebugModuleEditor></DebugModuleEditor>
+                              <DebugApiMessageHostnameEditor></DebugApiMessageHostnameEditor>
+                              <DebugRefreshProviderInterval
+                                 title="api refresh"
+                                 interval={{
+                                    getter: updateInterval,
+                                    setter: setUpdateInterval
+                                 }}
+                                 disabled={{
+                                    getter: updateDisabled,
+                                    setter: setUpdateDisabled
+                                 }}
+                              ></DebugRefreshProviderInterval>
+                              <DebugRefreshProviderInterval
+                                 title="module list refresh"
+                                 interval={{
+                                    getter: moduleListUpdateInterval,
+                                    setter: setModuleListUpdateInterval
+                                 }}
+                                 disabled={{
+                                    getter: moduleListDisabled,
+                                    setter: setModuleListDisabled
+                                 }}
+                              ></DebugRefreshProviderInterval>
+                           </div>
+                        </Show>
+                        <VersionNumber></VersionNumber>
+                     </ul>
+                     <Panels
+                        items={items}
+                        activeItem={activeItem()}
+                     ></Panels>
                   </div>
-               </header>
-               <div class={styles.main}>
-                  <ul class={styles.sidebar}>
-                     {items.map(item => (
-                        <Item
-                           text={item.text}
-                           iconName={item.iconName}
-                           active={activeItem}
-                           onClick={() => setActiveItem(item.text)}
-                        />
-                     ))}
-                     <div class={styles.sidebar_separator}></div>
-                     <Show when={isDebug}>
-                        <div class={styles.debug}>
-                           <button onclick={e=>e.currentTarget.parentElement?.classList.toggle(styles.collapsed)}>Debug mode</button>
-                           <DebugModuleEditor></DebugModuleEditor>
-                           <DebugApiMessageHostnameEditor></DebugApiMessageHostnameEditor>
-                           <DebugRefreshProviderInterval
-                              title="api refresh"
-                              interval={{
-                                 getter: updateInterval,
-                                 setter: setUpdateInterval
-                              }}
-                              disabled={{
-                                 getter: updateDisabled,
-                                 setter: setUpdateDisabled
-                              }}
-                           ></DebugRefreshProviderInterval>
-                            <DebugRefreshProviderInterval
-                              title="module list refresh"
-                              interval={{
-                                 getter: moduleListUpdateInterval,
-                                 setter: setModuleListUpdateInterval
-                              }}
-                              disabled={{
-                                 getter: moduleListDisabled,
-                                 setter: setModuleListDisabled
-                              }}
-                           ></DebugRefreshProviderInterval>
-                        </div>
-                     </Show>
-                     <VersionNumber></VersionNumber>
-                  </ul>
-                  <Panels 
-                     items={items}
-                     activeItem={activeItem()}
-                  ></Panels>
-               </div>
-            </RefreshProvider>
-            <RefreshProvider autoRefreshPeriod={moduleListUpdateInterval()}>
-               <ModuleListRefresher
-                  enabled={!moduleListDisabled()}
-                  min_interval={100}
-               ></ModuleListRefresher>
-            </RefreshProvider>
-         </ModuleListProvider>
+               </RefreshProvider>
+               <RefreshProvider autoRefreshPeriod={moduleListUpdateInterval()}>
+                  <ModuleListRefresher
+                     enabled={!moduleListDisabled()}
+                     min_interval={100}
+                  ></ModuleListRefresher>
+               </RefreshProvider>
+            </ModuleListProvider>
+         </ModalWindowProvider>
       </>
    )
 }
