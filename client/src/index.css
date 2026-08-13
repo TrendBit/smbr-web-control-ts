@@ -25,14 +25,14 @@ html,body,#root{
 *{
   color: inherit;
   margin: 0;
-  padding: 0;  
+  padding: 0;
 }
 
 option{
   background-color: var(--bg-color-1);
 }
 
-p{
+p, li{
   font-size: small;
   white-space: nowrap;
 }
