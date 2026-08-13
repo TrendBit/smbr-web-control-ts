@@ -4,7 +4,7 @@ import { TableStatic, widgetHeightChange } from "../../common/web-components/Tab
 import { Widget } from "../common/Widget"
 
 import styles from "./ServiceStatus.module.css"
-import { ServicesStatus  as ServicesStatusNamespace} from "../../apiMessages/services-status/_"
+import { Services  as ServicesStatusNamespace} from "../../apiMessages/services/_"
 import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider"
 import { AutoScrollerP } from "../../common/web-components/AutoScroller/AutoScroller"
 import { timeElapsedString } from "../../common/web-components/other/utils"
@@ -26,7 +26,7 @@ type row= {
 
 function getStateDuration(sinceTime : Date, deviceTime : Date | undefined) {
     if (deviceTime) {
-        let roundedTime = deviceTime.getTime() - sinceTime.getTime() 
+        let roundedTime = deviceTime.getTime() - sinceTime.getTime()
         roundedTime = roundedTime - (roundedTime % 1000)
         if (roundedTime < 0) {
             return "---"
