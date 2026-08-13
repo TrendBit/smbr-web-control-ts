@@ -55,7 +55,7 @@ export const instanceToIndex = {
   "Reserved"    : 0,
   "Instance_1"  : 1,
   "Instance_2"  : 2,
-  "Instance_3"  : 3, 
+  "Instance_3"  : 3,
   "Instance_4"  : 4,
   "Instance_5"  : 5,
   "Instance_6"  : 6,
@@ -181,10 +181,10 @@ export function ModuleListRefresher(props: { enabled: boolean, children?: any, m
             return
         }
         lastUpdate = Date.now();
-        
+
         let response = await System.sendModules();
         let doUpdate = false;
-        
+
         let lastRows = moduleListCntx.state()
         if (lastRows.length == response.modules.length) {
             for (let i = 0; i < lastRows.length; i++) {
@@ -200,7 +200,7 @@ export function ModuleListRefresher(props: { enabled: boolean, children?: any, m
             let newRows : Module[] = [];
             for(let module of response.modules){
                 newRows.push({
-                    type: module.module_type,
+                    type: module.type,
                     instance: module.instance,
                     uid: module.uid
                 })
