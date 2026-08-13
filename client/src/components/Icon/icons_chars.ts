@@ -29,7 +29,9 @@ export const iconNameToCharacter = {
     "home": "\ue88a",
     "science": "\uea4b",
     "terminal": "\ueb8e",
-    "build": "\ue869"
+    "build": "\ue869",
+    "cancel": "\ue5c9",
+    "edit": "\ue3c9"
 } as const;
 
 export type Icons = keyof typeof iconNameToCharacter;
