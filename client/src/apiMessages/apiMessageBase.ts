@@ -10,9 +10,10 @@ export interface apiMessageOptions{
     method ?: "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
     target ?: targetsType;
     hostname ?: string;
-    data? : string;
+    data? : BodyInit;
 
-    timeout? : number;
+    timeout?: number;
+    contentType?: string;
 
     validStatusCodes?: number[]
 }
@@ -25,7 +26,7 @@ export class ApiMessageError extends Error{
     this.stack=""
     this.name = "ApiMessageError";
   }
-  
+
 }
 
 export class ApiConnectionError extends ApiMessageError {
@@ -94,6 +95,7 @@ export async function sendApiMessage(options:apiMessageOptions){
     const hostname = options.hostname ?? getTargetHostname(target)
     const method = options.method ?? "GET"
     const returnCodes = options.validStatusCodes ?? [200]
+    const contentType = options.contentType ?? "application/json"
 
     const url_full = "http://" + hostname + ":" + port.toString() + url;
 
@@ -105,12 +107,12 @@ export async function sendApiMessage(options:apiMessageOptions){
             "headers": {
                 "Accept": "*/*",
                 "Accept-Language": "cs,sk;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Content-Type": "application/json"
+                "Content-Type": contentType
             },
             "body": options.data,
             "method": method,
             "mode": "cors",
-            signal: AbortSignal.timeout( options.timeout ?? 10000 )  
+            signal: AbortSignal.timeout( options.timeout ?? 10000 )
         });
     } catch(error){
         throw new ApiConnectionError(options);
@@ -126,7 +128,7 @@ export async function sendApiMessage(options:apiMessageOptions){
                 responseMessage = potentialMessage;
             }
         } catch (error) {
-            
+
         }
         throw new ApiInvalidStatusCodeError(options,response.status,responseMessage);
     }
@@ -213,5 +215,5 @@ export function checkTimestamp(value: any, key:string, options: apiMessageOption
 export function checkNull(value: any, key: string, options: apiMessageOptions){
     if(!isNull(value[key])){
       throw new ApiUnparsableBody(options,`response should contain a null: ${key}`)
-    }  
+    }
 }
