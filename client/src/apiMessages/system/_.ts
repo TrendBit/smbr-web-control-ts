@@ -158,4 +158,19 @@ export namespace System{
             dirty: data.dirty
         }
     }
+
+
+    export async function sendHostname(newHostname: string): Promise<void>{
+        let opts: apiMessageOptions = {
+            url: "/core/hostname",
+            data: '{"hostname": "' + newHostname + '"}',
+            method: "POST"
+        }
+
+        let response = await sendJsonApiMessage(opts);
+
+        HandleDeviceRestart({
+            hostname: newHostname
+        })
+    }
 }
