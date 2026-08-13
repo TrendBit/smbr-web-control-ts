@@ -4,6 +4,8 @@ import { TableStatic, widgetHeightChange } from "../../common/web-components/Tab
 import { createSignal } from "solid-js"
 import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
 import type { apiMessageSimple } from "../../apiMessages/apiMessageSimple"
+import { Button } from "../../common/web-components/Button/Button"
+import { useModalWindow } from "../../common/web-components/ModalWindow/ModalWindow"
 
 interface CanStatisticsProps{
     id:string
@@ -20,9 +22,9 @@ function renderRow(value : row, index : number){
     return ([
         <p style={{"justify-content":"left"}}>{value.label}</p>,
         <p style={{"justify-content":"right"}}>
-            <ApiFetcher 
-                numberOnly={(value.decimalPlaces)?{decimalPlaces:value.decimalPlaces}:undefined} 
-                target={value.value} 
+            <ApiFetcher
+                numberOnly={(value.decimalPlaces)?{decimalPlaces:value.decimalPlaces}:undefined}
+                target={value.value}
                 unit={value.unit}
             ></ApiFetcher>
         </p>
@@ -62,6 +64,7 @@ export function CanStatistics(props:CanStatisticsProps){
         }
     ])
 
+
     return (
         <GridElement id={props.id} w={1} h={widgetHeightChange(rows().length)}>
             <Widget name="Can statistics">
@@ -71,7 +74,7 @@ export function CanStatistics(props:CanStatisticsProps){
                     colSizes={[undefined,"150px"]}
                     renderRow={renderRow}
                     fillHeight={true}
-                ></TableStatic>
+             ></TableStatic>
             </Widget>
         </GridElement>
     )
