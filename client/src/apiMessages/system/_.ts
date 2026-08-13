@@ -1,15 +1,11 @@
-import { moduleInstances, moduleTypes, type moduleInstancesType, type moduleTypesType } from "../../components/other/ModuleListProvider";
+import { HandleDeviceRestart } from "../../components/other/DeviceRestartHandler";
+import { moduleInstances, moduleTypes, type Module, type moduleInstancesType, type moduleTypesType } from "../../components/other/ModuleListProvider";
 import { checkArray, checkBoolean, checkNumber, checkString, checkStringEnum, checkTimestamp, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
 
 export namespace System{
 
-    export type module = {
-        module_type : moduleTypesType
-        uid : string
-        instance : moduleInstancesType
-    }
     export type modulesResult = {
-        modules : module[]
+        modules : Module[]
     }
 
     export async function sendModules() : Promise<modulesResult>{
@@ -18,16 +14,22 @@ export namespace System{
         }
 
         let response = await sendJsonApiMessage(opts);
-        
+
+        let result : Module[] = [];
         checkArray({data:response.jsonValue},"data",(element : any)=>{
             checkStringEnum(element,"module_type",moduleTypes,opts);
             checkString(element,"uid",opts);
-            checkStringEnum(element,"instance",moduleInstances,opts);
+            checkStringEnum(element, "instance", moduleInstances, opts);
+
+            result.push({
+                type: element.module_type,
+                uid: element.uid,
+                instance: element.instance
+            })
             return true;
         },opts);
 
-        let result : module[] = response.jsonValue;
-        result.sort((a:module,b:module)=>(
+        result.sort((a:Module,b:Module)=>(
             (a.uid===b.uid)?(
                 0
             ):(
@@ -118,7 +120,7 @@ export namespace System{
             checkStringEnum(el,"instance",moduleInstances,opts);
             return true;
         }, opts);
-        
+
         data.issues.sort((a : issueType, b : issueType) => {
             let res = a.module.localeCompare(b.module);
             if (res == 0) {

@@ -1,6 +1,6 @@
 import { createEffect, createSignal } from "solid-js";
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
-import { instanceToIndex, useModuleListValue } from "../../components/other/ModuleListProvider";
+import { instanceToIndex, useModuleListValue, type Module } from "../../components/other/ModuleListProvider";
 import { TableStatic, widgetHeightChange } from "../../common/web-components/Table/Table";
 import { Widget } from "../common/Widget";
 import { Button } from "../../common/web-components/Button/Button";
@@ -9,54 +9,46 @@ import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher";
 import { sendApiMessageSimplePost } from "../../apiMessages/apiMessageSimple";
 import { System } from "../../apiMessages/system/_";
 import { sleep } from "../../common/web-components/other/utils";
+import { getModuleEndpoint } from "../../apiMessages/utils";
 
 
-function getModuleEndpoint(module : System.module, endpoint : string){
-    switch (module.module_type) {
-        case "pump":
-            return `/pump/${endpoint}?instance=${instanceToIndex[module.instance]}`
-        default:
-            return `/${module.module_type}/${endpoint}`
-    }
-}
-
-async function restartModule(module: System.module){
+async function restartModule(module: Module){
     await sendApiMessageSimplePost({url:getModuleEndpoint(module,"/restart"),key:"uid"},module.uid);
     await sleep(3000);
     return true
 }
 
 
-function renderRow(value : System.module, index: number){
+function renderRow(value : Module, index: number){
 
     return([
-        <p>{value.module_type}</p>,
+        <p>{value.type}</p>,
         <p>{value.uid}</p>,
         <p>{value.instance}</p>,
-        <ApiFetcher 
-            numberOnly={{decimalPlaces: 2}} 
-            target={{url: getModuleEndpoint(value,"/ping") ,key: "time_ms"}} 
+        <ApiFetcher
+            numberOnly={{decimalPlaces: 2}}
+            target={{url: getModuleEndpoint(value,"/ping") ,key: "time_ms"}}
             unit="ms"
         ></ApiFetcher>,
-        <ApiFetcher 
-            numberOnly={{decimalPlaces: 2}} 
-            target={{url: getModuleEndpoint(value,"/core_temp") ,key: "temperature"}} 
+        <ApiFetcher
+            numberOnly={{decimalPlaces: 2}}
+            target={{url: getModuleEndpoint(value,"/core_temp") ,key: "temperature"}}
             unit="°C"
         ></ApiFetcher>,
-        <ApiFetcher 
-            numberOnly={{decimalPlaces: 2}} 
-            target={{url: getModuleEndpoint(value,"/board_temp") ,key: "temperature"}} 
+        <ApiFetcher
+            numberOnly={{decimalPlaces: 2}}
+            target={{url: getModuleEndpoint(value,"/board_temp") ,key: "temperature"}}
             unit="°C"
         ></ApiFetcher>,
-        <ApiFetcher 
+        <ApiFetcher
             numberOnly={{
                 decimalPlaces: 2,
                 resultModifier: (value:number)=>(value*100)
-            }} 
-            target={{url: getModuleEndpoint(value,"/load") ,key: "load"}} 
+            }}
+            target={{url: getModuleEndpoint(value,"/load") ,key: "load"}}
             unit="%"
         ></ApiFetcher>,
-        <Button 
+        <Button
             tooltip="Restart this module"
             callback={()=>restartModule(value)}
         >
@@ -74,15 +66,15 @@ interface ModuleListDisplayBodyProps extends ModuleListDisplayProps{
 }
 
 export function ModuleListDisplayBody(props : ModuleListDisplayBodyProps){
-    const [rows, setRows] = createSignal<System.module[]>([]);
+    const [rows, setRows] = createSignal<Module[]>([]);
     const moduleListCntxt = useModuleListValue();
 
     createEffect(()=>{
         if(moduleListCntxt){
-            let new_rows : System.module[] = [];
+            let new_rows : Module[] = [];
             for(let module of moduleListCntxt.state()){
                 new_rows.push({
-                    module_type: module.type,
+                    type: module.type,
                     uid: module.uid,
                     instance: module.instance
                 })
@@ -95,7 +87,7 @@ export function ModuleListDisplayBody(props : ModuleListDisplayBodyProps){
         props.rowNumSetter(rows().length);
     })
 
-    
+
 
     return (
         <TableStatic
