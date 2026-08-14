@@ -129,6 +129,7 @@ export function SystemUpdateBody(props: SystemUpdateBodyProps) {
                         <li>upload the selected file to the server</li>
                         <li>apply the update</li>
                         <li>restart the device</li>
+                        <li>update connected modules</li>
                         <li>reload web control interface</li>
                     </ul>
                 </div>
