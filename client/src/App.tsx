@@ -113,7 +113,7 @@ export function VersionNumber(props: VersionNumberProps) {
 
     return (
         <div class={props.class} classList={{[styles.rest_version]:true}}>
-            <p>REST version:</p>
+            <p>System version:</p>
             <ValueDisplay value={version()} error={err()}></ValueDisplay>
         </div>
     )
