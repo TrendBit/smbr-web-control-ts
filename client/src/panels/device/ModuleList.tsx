@@ -48,6 +48,18 @@ function renderRow(value : Module, index: number){
             target={{url: getModuleEndpoint(value,"/load") ,key: "load"}}
             unit="%"
         ></ApiFetcher>,
+        <span style={{"justify-content":"space-evenly"}}>
+            <ApiFetcher
+                target={{url: getModuleEndpoint(value,"/fw_version") ,key: "version"}}
+            ></ApiFetcher>
+            <span style={{ "padding-left": "5px", display: "flex", "align-items": "center"}}>
+                <span>(</span>
+                <ApiFetcher
+                    target={{url: getModuleEndpoint(value,"/hw_version") ,key: "version"}}
+                ></ApiFetcher>
+                <span>)</span>
+            </span>
+        </span>,
         <Button
             tooltip="Restart this module"
             callback={()=>restartModule(value)}
@@ -91,9 +103,9 @@ export function ModuleListDisplayBody(props : ModuleListDisplayBodyProps){
 
     return (
         <TableStatic
-            headers={["name","id","instance","ping","core temperature","module temperature","CPU load","reset"]}
+            headers={["name","id","instance","ping","core temp","module temp","CPU load","fw version (hw version)","reset"]}
             data={rows()}
-            colSizes={["90px","150px","130px",undefined,undefined,undefined,undefined,"35px"]}
+            colSizes={["90px","120px","100px",undefined,undefined,undefined,undefined,"120px","35px"]}
             renderRow={renderRow}
             fillHeight={true}
         ></TableStatic>
