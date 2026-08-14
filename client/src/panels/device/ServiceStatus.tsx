@@ -31,7 +31,7 @@ function getStateDuration(sinceTime : Date, deviceTime : Date | undefined) {
         if (roundedTime < 0) {
             return "---"
         }
-        return timeElapsedString(roundedTime,{maxTimeStrings: 2, excludeLabel: true})
+        return timeElapsedString(roundedTime,{maxTimeStrings: 2, excludeLabel: true, shortLabels: true})
     } else {
         return "---"
     }
@@ -96,7 +96,7 @@ export function ServicesStatusBody(props : ServiceStatusBodyProps){
         <TableStatic
             data={rows()}
             headers={["state","service name","in this state for"]}
-            colSizes={["80px",undefined,"120px"]}
+            colSizes={["80px",undefined,"80px"]}
             renderRow={renderRow}
             fillHeight={true}
         ></TableStatic>
