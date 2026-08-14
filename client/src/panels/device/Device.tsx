@@ -7,7 +7,6 @@ import { ServicesStatus } from "./ServiceStatus.tsx";
 import { CanStatistics } from "./CanStatistics.tsx";
 import { ModuleProblems } from "./Problems.tsx";
 import { ModuleIssues } from "./Issues.tsx";
-import { SystemUpdate } from "./SystemUpdate.tsx";
 
 export function Device() {
   const moduleListCntxt = useModuleListValue();
@@ -24,7 +23,6 @@ export function Device() {
           <CanStatistics id="canStatistics"></CanStatistics>
           <ModuleIssues id="issues"></ModuleIssues>
           <ModuleProblems id="problems"></ModuleProblems>
-          <SystemUpdate id="systemUpdates"></SystemUpdate>
       </GridstackGrid>
     </div>
   );
