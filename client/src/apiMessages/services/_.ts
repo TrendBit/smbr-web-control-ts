@@ -78,8 +78,9 @@ export namespace Services{
             url: "/services/swupdate/update",
             contentType: "application/octet-stream",
             method: "POST",
-            validStatusCodes: [200,202],
-            data: await updateFile.arrayBuffer()
+            validStatusCodes: [200, 202],
+            data: await updateFile.arrayBuffer(),
+            timeout: 60000
         }
 
         let result = await sendJsonApiMessage(opts);
