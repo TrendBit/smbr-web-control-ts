@@ -1,6 +1,6 @@
 import { createEffect, createSignal, For, Show, type Accessor, type JSXElement, type Setter } from 'solid-js'
-import './common/web-components/css/colors.css'
-import './common/web-components/css/global.css'
+import '../lib/web-components/css/colors.css'
+import '../lib/web-components/css/global.css'
 import "./components/Icon/iconFont.css"
 import styles from './App.module.css'
 

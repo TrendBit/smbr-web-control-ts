@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 
-import { createFontSubsetter } from "./src/common/web-components/Icon/subsetter_plugin"
+import { createFontSubsetter } from "./lib/web-components/Icon/subsetter_plugin"
 import { IconCharacters } from "./src/components/Icon/icons_chars"
 
 export default defineConfig({
