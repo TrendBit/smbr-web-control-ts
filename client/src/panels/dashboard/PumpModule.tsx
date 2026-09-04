@@ -1,13 +1,13 @@
 import { createEffect, createSignal, For, Show } from "solid-js";
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
-import { type Module } from "../../components/other/ModuleListProvider";
+import { type Module } from "../../../lib/common-types/Module";
 import { ApiSlider } from "../../components/ApiSlider/ApiSlider";
 import { Widget } from "../common/Widget";
 
 import styles from "./PumpModule.module.css"
 import { useRefreshContext, refreshValueUpdate } from "../../../lib/web-components/other/RefreshProvider";
-import { Pumps } from "../../apiMessages/pumps/_";
-import { sendApiMessageSimple } from "../../apiMessages/apiMessageSimple";
+import { Pumps } from "../../../lib/api-messages/pumps/_";
+import { sendApiMessageSimple } from "../../../lib/api-messages/apiMessageSimple";
 import { isNumber } from "chart.js/helpers";
 import { Icon } from "../../components/Icon/Icon";
 

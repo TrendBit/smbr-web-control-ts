@@ -1,3 +1,9 @@
 [submodule "client/src/common/web-components"]
 	path = client/lib/web-components
 	url = git@github.com:TrendBit/SMPBR-web-components.git
+[submodule "client/lib/api-messages"]
+	path = client/lib/api-messages
+	url = git@github.com:TrendBit/SMPBR-web-api-messages.git
+[submodule "client/lib/common-types"]
+	path = client/lib/common-types
+	url = https://github.com/TrendBit/SMPBR-web-common-types.git

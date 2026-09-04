@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
 
-import { sendApiMessageSimple, type apiMessageSimple } from '../../apiMessages/apiMessageSimple';
+import { sendApiMessageSimple, type apiMessageSimple } from '../../../lib/api-messages/apiMessageSimple';
 import { refreshValueUpdate, useRefreshContext } from '../../../lib/web-components/other/RefreshProvider';
 import { ValueDisplay, type ValueDisplayProps } from '../../../lib/web-components/ValueDisplay/ValueDisplay';
 

@@ -1,12 +1,12 @@
 import { Show } from "solid-js";
 import { GridstackGrid } from "../../components/GridstackGrid/GridstackGrid.tsx";
-import { countInstancesOfType, useModuleListValue } from "../../components/other/ModuleListProvider.tsx";
 import { DeviceInformation } from "./DeviceInformation.tsx";
 import { ModuleListDisplay } from "./ModuleList.tsx";
 import { ServicesStatus } from "./ServiceStatus.tsx";
 import { CanStatistics } from "./CanStatistics.tsx";
 import { ModuleProblems } from "./Problems.tsx";
 import { ModuleIssues } from "./Issues.tsx";
+import { countInstancesOfType, useModuleListValue } from "../../components/other/ModuleListProvider.tsx";
 
 export function Device() {
   const moduleListCntxt = useModuleListValue();

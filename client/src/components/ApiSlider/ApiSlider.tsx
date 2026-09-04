@@ -1,5 +1,5 @@
 import { createEffect, createSignal } from "solid-js"
-import { sendApiMessageSimple, sendApiMessageSimplePost, type apiMessageSimple } from "../../apiMessages/apiMessageSimple"
+import { sendApiMessageSimple, sendApiMessageSimplePost, type apiMessageSimple } from "../../../lib/api-messages/apiMessageSimple"
 import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider"
 import { Slider } from "../../../lib/web-components/Slider/Slider"
 

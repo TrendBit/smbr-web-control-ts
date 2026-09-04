@@ -4,11 +4,11 @@ import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Tab
 import { Widget } from "../common/Widget"
 
 import styles from "./ServiceStatus.module.css"
-import { Services  as ServicesStatusNamespace} from "../../apiMessages/services/_"
+import { Services  as ServicesStatusNamespace} from "../../../lib/api-messages/services/_"
 import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider"
 import { AutoScrollerP } from "../../../lib/web-components/AutoScroller/AutoScroller"
 import { timeElapsedString } from "../../../lib/web-components/other/utils"
-import { Time } from "../../apiMessages/time/_"
+import { Time } from "../../../lib/api-messages/time/_"
 
 interface ServiceStatusProps{
     id:string

@@ -3,10 +3,10 @@ import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { ApiSlider } from "../../components/ApiSlider/ApiSlider"
 import { Widget } from "../common/Widget"
 import { ApiValueController } from "../../components/ValueController/ValueControlller"
-import { sendApiMessage } from "../../apiMessages/apiMessageBase"
-import { Sensor_Heater } from "../../apiMessages/sensor/heater"
+import { sendApiMessage } from "../../../lib/api-messages/apiMessageBase"
+import { Sensor_Heater } from "../../../lib/api-messages/sensor/heater"
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider"
-import { Control_Mixer } from "../../apiMessages/control/mixer"
+import { Control_Mixer } from "../../../lib/api-messages/control/mixer"
 
 import styles from "./Control.module.css"
 

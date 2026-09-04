@@ -2,7 +2,7 @@ import { createEffect, createSignal, For, Show } from "solid-js"
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Widget } from "../common/Widget"
 import styles from "./Problems.module.css"
-import { System } from "../../apiMessages/system/_";
+import { System } from "../../../lib/api-messages/system/_";
 import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
 import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
 

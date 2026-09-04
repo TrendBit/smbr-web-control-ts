@@ -7,7 +7,7 @@ import { Button } from "../../../lib/web-components/Button/Button";
 import styles from './Widget.module.css'
 import { ApiFetcher, type ApiFetcherProps } from "../../components/ApiFetcher/ApiFetcher";
 import { RefreshProvider, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
-import { instanceToIndex, moduleInstanceColors, type Module } from "../../components/other/ModuleListProvider";
+import { instanceToIndex, moduleInstanceColors, type Module } from "../../../lib/common-types/Module";
 
 interface WidgetHotbarValueProps {
     name:string,

@@ -8,9 +8,9 @@ import textEditorStyles from "./TextEditor.module.css"
 import { Button } from "../../../../lib/web-components/Button/Button";
 import { Icon } from "../../../components/Icon/Icon";
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../../lib/web-components/other/RefreshProvider";
-import { ApiInvalidStatusCodeError, type targetsType } from "../../../apiMessages/apiMessageBase";
-import { parseApiMessageFileList, sendApiMessageDeleteFile, sendApiMessageGetFileContent, sendApiMessageGetFileList, sendApiMessageSetFileContent, type apiMessageGetFileContentResult, type FileListDirectory } from "../../../apiMessages/apiMessageFileOperations";
-import { Scheduler } from "../../../apiMessages/scheduler/_";
+import { ApiInvalidStatusCodeError, type targetsType } from "../../../../lib/api-messages/apiMessageBase";
+import { parseApiMessageFileList, sendApiMessageDeleteFile, sendApiMessageGetFileContent, sendApiMessageGetFileList, sendApiMessageSetFileContent, type apiMessageGetFileContentResult, type FileListDirectory } from "../../../../lib/api-messages/apiMessageFileOperations";
+import { Scheduler } from "../../../../lib/api-messages/scheduler/_";
 import { AutoScrollerP } from "../../../../lib/web-components/AutoScroller/AutoScroller";
 import { PopupPanel, type Popup } from "../Widget";
 
