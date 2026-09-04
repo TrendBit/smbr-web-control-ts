@@ -1,11 +1,11 @@
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Widget } from "../common/Widget"
-import { TableStatic, widgetHeightChange } from "../../common/web-components/Table/Table"
+import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Table/Table"
 import { createSignal } from "solid-js"
 import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
 import type { apiMessageSimple } from "../../apiMessages/apiMessageSimple"
-import { Button } from "../../common/web-components/Button/Button"
-import { useModalWindow } from "../../common/web-components/ModalWindow/ModalWindow"
+import { Button } from "../../../lib/web-components/Button/Button"
+import { useModalWindow } from "../../../lib/web-components/ModalWindow/ModalWindow"
 
 interface CanStatisticsProps{
     id:string

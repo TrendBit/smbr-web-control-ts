@@ -5,7 +5,7 @@ import { ApiSlider } from "../../components/ApiSlider/ApiSlider";
 import { Widget } from "../common/Widget";
 
 import styles from "./PumpModule.module.css"
-import { useRefreshContext, refreshValueUpdate } from "../../common/web-components/other/RefreshProvider";
+import { useRefreshContext, refreshValueUpdate } from "../../../lib/web-components/other/RefreshProvider";
 import { Pumps } from "../../apiMessages/pumps/_";
 import { sendApiMessageSimple } from "../../apiMessages/apiMessageSimple";
 import { isNumber } from "chart.js/helpers";

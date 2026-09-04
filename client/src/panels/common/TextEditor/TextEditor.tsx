@@ -5,13 +5,13 @@ import codeStyles from "./CodePart.module.css";
 import fileListStyles from "./FileList.module.css";
 import runtimeInfoStyles from "./RuntimeInfo.module.css";
 import textEditorStyles from "./TextEditor.module.css"
-import { Button } from "../../../common/web-components/Button/Button";
+import { Button } from "../../../../lib/web-components/Button/Button";
 import { Icon } from "../../../components/Icon/Icon";
-import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../common/web-components/other/RefreshProvider";
+import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../../lib/web-components/other/RefreshProvider";
 import { ApiInvalidStatusCodeError, type targetsType } from "../../../apiMessages/apiMessageBase";
 import { parseApiMessageFileList, sendApiMessageDeleteFile, sendApiMessageGetFileContent, sendApiMessageGetFileList, sendApiMessageSetFileContent, type apiMessageGetFileContentResult, type FileListDirectory } from "../../../apiMessages/apiMessageFileOperations";
 import { Scheduler } from "../../../apiMessages/scheduler/_";
-import { AutoScrollerP } from "../../../common/web-components/AutoScroller/AutoScroller";
+import { AutoScrollerP } from "../../../../lib/web-components/AutoScroller/AutoScroller";
 import { PopupPanel, type Popup } from "../Widget";
 
 

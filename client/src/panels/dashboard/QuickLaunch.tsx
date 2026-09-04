@@ -1,14 +1,14 @@
 import { createEffect, createSignal, For } from "solid-js";
-import { Button } from "../../common/web-components/Button/Button";
+import { Button } from "../../../lib/web-components/Button/Button";
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Icon } from "../../components/Icon/Icon";
 import { type Popup, Widget } from "../common/Widget";
 
 import styles from "./QuickLaunch.module.css"
-import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider";
+import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
 import { Recipes } from "../../apiMessages/recipes/_";
 import { Scheduler } from "../../apiMessages/scheduler/_";
-import { sleep } from "../../common/web-components/other/utils";
+import { sleep } from "../../../lib/web-components/other/utils";
 import { ApiInvalidStatusCodeError } from "../../apiMessages/apiMessageBase";
 
 interface QuickLaunchProps{

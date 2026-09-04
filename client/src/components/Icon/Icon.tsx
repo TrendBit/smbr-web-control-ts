@@ -1,5 +1,5 @@
 import { Public } from "../../assets/PublicFiles";
-import { createIconComponent } from "../../common/web-components/Icon/Icon";
+import { createIconComponent } from "../../../lib/web-components/Icon/Icon";
 import { iconNameToCharacter, type Icons } from "./icons_chars";
 
 

@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isNull, isNumber, isString, isValidDateTime } from "../common/web-components/other/utils";
+import { isArray, isBoolean, isNull, isNumber, isString, isValidDateTime } from "../../lib/web-components/other/utils";
 import { smbr_apiMessageConfig } from "./apiMessageConfig";
 
 export const targets = ["reactorApi","webControlApi"] as const;

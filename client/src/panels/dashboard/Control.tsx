@@ -5,7 +5,7 @@ import { Widget } from "../common/Widget"
 import { ApiValueController } from "../../components/ValueController/ValueControlller"
 import { sendApiMessage } from "../../apiMessages/apiMessageBase"
 import { Sensor_Heater } from "../../apiMessages/sensor/heater"
-import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider"
+import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider"
 import { Control_Mixer } from "../../apiMessages/control/mixer"
 
 import styles from "./Control.module.css"

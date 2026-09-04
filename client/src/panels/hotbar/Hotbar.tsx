@@ -1,12 +1,12 @@
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js';
 import { ApiFetcher } from '../../components/ApiFetcher/ApiFetcher'
-import { formatTime } from '../../common/web-components/other/utils';
+import { formatTime } from '../../../lib/web-components/other/utils';
 
 import styles from './Hotbar.module.css'
 import { countInstancesOfType, useModuleListValue } from '../../components/other/ModuleListProvider';
 import { sendApiMessageSimple, type apiMessageSimple } from '../../apiMessages/apiMessageSimple';
-import { refreshValueUpdate, useRefreshContext } from '../../common/web-components/other/RefreshProvider';
-import { ValueDisplay } from '../../common/web-components/ValueDisplay/ValueDisplay';
+import { refreshValueUpdate, useRefreshContext } from '../../../lib/web-components/other/RefreshProvider';
+import { ValueDisplay } from '../../../lib/web-components/ValueDisplay/ValueDisplay';
 import { System } from '../../apiMessages/system/_';
 import { Time } from '../../apiMessages/time/_';
 

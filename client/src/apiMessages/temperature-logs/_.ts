@@ -1,6 +1,6 @@
 import { isNumber } from "chart.js/helpers"
 import { checkArray, checkNumber, checkString, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
-import { isNull } from "../../common/web-components/other/utils"
+import { isNull } from "../../../lib/web-components/other/utils"
 
 export namespace TemperatureLogs{
     export type Logs = Record<string,(number|undefined)[]>

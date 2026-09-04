@@ -1,5 +1,5 @@
 import { createContext, useContext, createSignal, createEffect, onMount, onCleanup, children } from "solid-js";
-import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider";
+import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
 import { System } from "../../apiMessages/system/_";
 
 export const moduleTypes = [
