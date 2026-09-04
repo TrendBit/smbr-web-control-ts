@@ -1,3 +1,3 @@
-import type { ModalWindowContextValue } from "../../common/web-components/ModalWindow/ModalWindow";
+import type { ModalWindowContextValue } from "../../../lib/web-components/ModalWindow/ModalWindow";
 
 export let globalModalWindow : {cntxt : ModalWindowContextValue | undefined} =  {cntxt: undefined}

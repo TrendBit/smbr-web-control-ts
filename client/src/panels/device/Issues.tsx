@@ -3,8 +3,8 @@ import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Widget } from "../common/Widget"
 import styles from "./Issues.module.css"
 import { System } from "../../apiMessages/system/_";
-import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider";
-import { ValueDisplay } from "../../common/web-components/ValueDisplay/ValueDisplay";
+import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
+import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
 import { moduleInstanceColors, moduleInstances } from "../../components/other/ModuleListProvider";
 
 function renderGeneric(issue: System.issueType) : JSXElement {

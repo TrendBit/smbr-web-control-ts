@@ -1,16 +1,16 @@
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Widget } from "../common/Widget"
-import { TableStatic, widgetHeightChange } from "../../common/web-components/Table/Table"
+import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Table/Table"
 import { createSignal, createUniqueId, Show, type JSXElement } from "solid-js"
 import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
 import type { apiMessageSimple } from "../../apiMessages/apiMessageSimple"
-import { Button } from "../../common/web-components/Button/Button"
+import { Button } from "../../../lib/web-components/Button/Button"
 import { Icon } from "../../components/Icon/Icon"
-import { useModalWindow } from "../../common/web-components/ModalWindow/ModalWindow"
+import { useModalWindow } from "../../../lib/web-components/ModalWindow/ModalWindow"
 import styles from "./DeviceInformation.module.css"
 import { System } from "../../apiMessages/system/_"
 import { Services } from "../../apiMessages/services/_"
-import { LoadingDots } from "../../common/web-components/LoadingDots/loadingDots"
+import { LoadingDots } from "../../../lib/web-components/LoadingDots/loadingDots"
 
 interface DeviceInformationProps{
     id:string

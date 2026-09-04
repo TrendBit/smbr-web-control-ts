@@ -1,8 +1,8 @@
 import { createEffect, createSignal } from "solid-js";
 import { sendApiMessageSimple, sendApiMessageSimplePost, type apiMessageSimple } from "../../apiMessages/apiMessageSimple";
-import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider";
+import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
 import { isNumber } from "chart.js/helpers";
-import { ValueController } from "../../common/web-components/ValueController/ValueControlller";
+import { ValueController } from "../../../lib/web-components/ValueController/ValueControlller";
 
 interface ValueControllerApiControl{
     title : string,

@@ -3,7 +3,7 @@ import { ApiSlider } from "../../components/ApiSlider/ApiSlider";
 import { Widget } from "../common/Widget";
 
 import styles from "./LedPanel.module.css"
-import { Button } from "../../common/web-components/Button/Button";
+import { Button } from "../../../lib/web-components/Button/Button";
 import { sendJsonApiMessage } from "../../apiMessages/apiMessageBase";
 import { For } from "solid-js";
 

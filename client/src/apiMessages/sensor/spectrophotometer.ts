@@ -1,4 +1,4 @@
-import { isArray, isNumber } from "../../common/web-components/other/utils"
+import { isArray, isNumber } from "../../../lib/web-components/other/utils"
 import { ApiUnparsableBody, checkArray, checkNumber, sendJsonApiMessage, type apiMessageOptions } from "../apiMessageBase"
 
 export namespace Sensor_Spectrophotometer{

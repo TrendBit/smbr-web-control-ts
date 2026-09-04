@@ -1,11 +1,11 @@
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
-import { TableStatic, widgetHeightChange } from "../../common/web-components/Table/Table";
+import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Table/Table";
 import { Widget } from "../common/Widget";
 import { Icon } from "../../components/Icon/Icon";
 import { createEffect, createSignal, onMount } from "solid-js";
-import { Button } from "../../common/web-components/Button/Button";
-import { refreshValueUpdate, useRefreshContext } from "../../common/web-components/other/RefreshProvider";
-import { ValueDisplay } from "../../common/web-components/ValueDisplay/ValueDisplay";
+import { Button } from "../../../lib/web-components/Button/Button";
+import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
+import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
 import { Sensor_Spectrophotometer } from "../../apiMessages/sensor/spectrophotometer";
 import { sendApiMessage } from "../../apiMessages/apiMessageBase";
 
