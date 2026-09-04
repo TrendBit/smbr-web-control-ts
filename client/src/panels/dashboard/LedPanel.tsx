@@ -4,7 +4,7 @@ import { Widget } from "../common/Widget";
 
 import styles from "./LedPanel.module.css"
 import { Button } from "../../../lib/web-components/Button/Button";
-import { sendJsonApiMessage } from "../../apiMessages/apiMessageBase";
+import { sendJsonApiMessage } from "../../../lib/api-messages/apiMessageBase";
 import { For } from "solid-js";
 
 interface LEDPanelProps{

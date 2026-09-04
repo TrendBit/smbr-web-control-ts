@@ -13,10 +13,10 @@ import { createUniqueId } from "solid-js";
 import { enforceMax, enforceMin, enforceMinMax } from "../../../lib/web-components/other/inputFilters";
 import { Icon } from "../../components/Icon/Icon";
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
-import { Sensor_Fluorometer } from "../../apiMessages/sensor/fluorometer";
+import { Sensor_Fluorometer } from "../../../lib/api-messages/sensor/fluorometer";
 import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
 import type { TooltipItem } from "chart.js";
-import { sendApiMessageSimple } from "../../apiMessages/apiMessageSimple";
+import { sendApiMessageSimple } from "../../../lib/api-messages/apiMessageSimple";
 import { LoadingDots } from "../../../lib/web-components/LoadingDots/loadingDots";
 
 type statRow = {

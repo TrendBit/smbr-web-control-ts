@@ -19,7 +19,7 @@ import { DebugApiMessageHostnameEditor, DebugModuleEditor, DebugRefreshProviderI
 import { ModuleListProvider, ModuleListRefresher } from './components/other/ModuleListProvider'
 import { AutoScrollerP } from '../lib/web-components/AutoScroller/AutoScroller'
 import { ValueDisplay } from '../lib/web-components/ValueDisplay/ValueDisplay'
-import { System } from './apiMessages/system/_'
+import { System } from '../lib/api-messages/system/_'
 import { ModalWindowProvider, useModalWindow } from '../lib/web-components/ModalWindow/ModalWindow'
 import { globalModalWindow } from './components/other/GlobalModalWindow'
 

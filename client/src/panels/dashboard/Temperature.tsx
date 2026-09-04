@@ -8,11 +8,12 @@ import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
 import { darkenColor, getColor } from "../../../lib/web-components/other/colorGenerator"
 import { LineChart, type datasetType } from "../../components/LineChart/LineChart"
 import { formatTime, getCountdownArray } from "../../../lib/web-components/other/utils"
-import { countInstancesOfType, getInstancesForType, moduleInstanceColors, useModuleListValue, type Module, type moduleInstancesType } from "../../components/other/ModuleListProvider";
+import { moduleInstanceColors, type Module, type moduleInstancesType } from "../../../lib/common-types/Module";
 import { RadialSelect } from "../../../lib/web-components/RadialSelect/RadialSelect"
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider"
-import { TemperatureLogs } from "../../apiMessages/temperature-logs/_"
+import { TemperatureLogs } from "../../../lib/api-messages/temperature-logs/_"
 import styles from "./Temperature.module.css"
+import { countInstancesOfType, getInstancesForType, useModuleListValue } from "../../components/other/ModuleListProvider"
 // create subrows by setting icon as undefined
 // row indexes are then given automatically after generating the array
 type row = {

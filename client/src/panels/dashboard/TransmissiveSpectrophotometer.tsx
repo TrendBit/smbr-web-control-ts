@@ -6,8 +6,8 @@ import { createEffect, createSignal, onMount } from "solid-js";
 import { Button } from "../../../lib/web-components/Button/Button";
 import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
 import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
-import { Sensor_Spectrophotometer } from "../../apiMessages/sensor/spectrophotometer";
-import { sendApiMessage } from "../../apiMessages/apiMessageBase";
+import { Sensor_Spectrophotometer } from "../../../lib/api-messages/sensor/spectrophotometer";
+import { sendApiMessage } from "../../../lib/api-messages/apiMessageBase";
 
 interface TransSpectrophotometerProps{
     id: string;

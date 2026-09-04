@@ -3,12 +3,12 @@ import { ApiFetcher } from '../../components/ApiFetcher/ApiFetcher'
 import { formatTime } from '../../../lib/web-components/other/utils';
 
 import styles from './Hotbar.module.css'
-import { countInstancesOfType, useModuleListValue } from '../../components/other/ModuleListProvider';
-import { sendApiMessageSimple, type apiMessageSimple } from '../../apiMessages/apiMessageSimple';
+import { sendApiMessageSimple, type apiMessageSimple } from '../../../lib/api-messages/apiMessageSimple';
 import { refreshValueUpdate, useRefreshContext } from '../../../lib/web-components/other/RefreshProvider';
 import { ValueDisplay } from '../../../lib/web-components/ValueDisplay/ValueDisplay';
-import { System } from '../../apiMessages/system/_';
-import { Time } from '../../apiMessages/time/_';
+import { System } from '../../../lib/api-messages/system/_';
+import { Time } from '../../../lib/api-messages/time/_';
+import { countInstancesOfType, useModuleListValue } from '../../components/other/ModuleListProvider';
 
 
 type SimpleDisplayProps = {

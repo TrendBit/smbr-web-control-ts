@@ -1,6 +1,5 @@
 import { For, Show } from "solid-js"
 import { GridstackGrid } from "../../components/GridstackGrid/GridstackGrid"
-import { countInstancesOfType, getModulesOfType, useModuleListValue } from "../../components/other/ModuleListProvider"
 import { Control } from "./Control"
 import { KinematicFluorometer } from "./KineticFluorometer"
 import { LEDPanel } from "./LedPanel"
@@ -8,6 +7,7 @@ import { QuickLaunch } from "./QuickLaunch"
 import { Temperature } from "./Temperature"
 import { TransSpectrophotometer } from "./TransmissiveSpectrophotometer"
 import { PumpModule } from "./PumpModule"
+import { countInstancesOfType, getModulesOfType, useModuleListValue } from "../../components/other/ModuleListProvider"
 
 export function Dashboard() {
   const moduleListCntxt = useModuleListValue();

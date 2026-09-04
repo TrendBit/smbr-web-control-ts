@@ -6,10 +6,10 @@ import { type Popup, Widget } from "../common/Widget";
 
 import styles from "./QuickLaunch.module.css"
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
-import { Recipes } from "../../apiMessages/recipes/_";
-import { Scheduler } from "../../apiMessages/scheduler/_";
+import { Recipes } from "../../../lib/api-messages/recipes/_";
+import { Scheduler } from "../../../lib/api-messages/scheduler/_";
 import { sleep } from "../../../lib/web-components/other/utils";
-import { ApiInvalidStatusCodeError } from "../../apiMessages/apiMessageBase";
+import { ApiInvalidStatusCodeError } from "../../../lib/api-messages/apiMessageBase";
 
 interface QuickLaunchProps{
     id: string;

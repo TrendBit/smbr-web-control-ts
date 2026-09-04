@@ -1,15 +1,16 @@
 import { createEffect, createSignal } from "solid-js";
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
-import { instanceToIndex, useModuleListValue, type Module } from "../../components/other/ModuleListProvider";
+import { type Module } from "../../../lib/common-types/Module";
 import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Table/Table";
 import { Widget } from "../common/Widget";
 import { Button } from "../../../lib/web-components/Button/Button";
 import { Icon } from "../../components/Icon/Icon";
 import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher";
-import { sendApiMessageSimplePost } from "../../apiMessages/apiMessageSimple";
-import { System } from "../../apiMessages/system/_";
+import { sendApiMessageSimplePost } from "../../../lib/api-messages/apiMessageSimple";
+import { System } from "../../../lib/api-messages/system/_";
 import { sleep } from "../../../lib/web-components/other/utils";
-import { getModuleEndpoint } from "../../apiMessages/utils";
+import { getModuleEndpoint } from "../../../lib/api-messages/utils";
+import { useModuleListValue } from "../../components/other/ModuleListProvider";
 
 
 async function restartModule(module: Module){

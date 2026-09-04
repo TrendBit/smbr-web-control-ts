@@ -1,10 +1,10 @@
 import { createSignal, For, onMount } from "solid-js";
 import styles from "./Debug.module.css"
-import { moduleInstances, moduleTypes, useModuleListValue, type Module, type moduleInstancesType, type moduleTypesType } from "../other/ModuleListProvider";
 import { createServerCookie } from "@solid-primitives/cookies";
 import { isArray, isNumber, isObject } from "../../../lib/web-components/other/utils";
-import { smbr_apiMessageConfig } from "../../apiMessages/apiMessageConfig";
-import type { targetsType } from "../../apiMessages/apiMessageBase";
+import { smbr_apiMessageConfig } from "../../../lib/api-messages/apiMessageConfig";
+import { useModuleListValue } from "../other/ModuleListProvider";
+import { moduleInstances, moduleTypes, type Module, type moduleInstancesType, type moduleTypesType } from "../../../lib/common-types/Module";
 
 interface DebugModuleEditorProps{
     class?: string;

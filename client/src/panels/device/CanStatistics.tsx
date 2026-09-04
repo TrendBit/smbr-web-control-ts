@@ -3,7 +3,7 @@ import { Widget } from "../common/Widget"
 import { TableStatic, widgetHeightChange } from "../../../lib/web-components/Table/Table"
 import { createSignal } from "solid-js"
 import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
-import type { apiMessageSimple } from "../../apiMessages/apiMessageSimple"
+import type { apiMessageSimple } from "../../../lib/api-messages/apiMessageSimple"
 import { Button } from "../../../lib/web-components/Button/Button"
 import { useModalWindow } from "../../../lib/web-components/ModalWindow/ModalWindow"
 
