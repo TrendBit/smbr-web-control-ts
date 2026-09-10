@@ -18,6 +18,7 @@ import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisp
 import type { TooltipItem } from "chart.js";
 import { sendApiMessageSimple } from "../../../lib/api-messages/apiMessageSimple";
 import { LoadingDots } from "../../../lib/web-components/LoadingDots/loadingDots";
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 
 type statRow = {
     name: string;
@@ -182,8 +183,8 @@ export function KinematicFluorometerBody(props: KinematicFluorometerProps){
         if(measurement){
             let filename = 'OJIP_';
             try { 
-                filename+= (await sendApiMessageSimple({url:"/core/hostname",key:"hostname"})).toString() + "_";
-                filename+= (await sendApiMessageSimple({url:"/core/sid",key:"sid"})).toString() + "_";
+                filename+= (await sendApiMessageSimple({url:"/core/hostname",key:"hostname",target:reactorApiTarget})).toString() + "_";
+                filename+= (await sendApiMessageSimple({url:"/core/sid",key:"sid",target:reactorApiTarget})).toString() + "_";
             } catch (error) {
                 filename = 'OJIP_unknownDevice_';
             }

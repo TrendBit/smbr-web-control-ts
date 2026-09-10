@@ -10,6 +10,7 @@ import { Pumps } from "../../../lib/api-messages/pumps/_";
 import { sendApiMessageSimple } from "../../../lib/api-messages/apiMessageSimple";
 import { isNumber } from "chart.js/helpers";
 import { Icon } from "../../components/Icon/Icon";
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 
 interface PumpModuleBodyProps {
     module : Module
@@ -32,7 +33,8 @@ export function PumpModuleBody(props : PumpModuleBodyProps){
 
         let result = await sendApiMessageSimple({
             url: Pumps.getPumpUrl(props.module.instance,undefined,"pump_count"),
-            key:"pump_count"
+            key: "pump_count",
+            target:reactorApiTarget
         })
         if(isNumber(result)){
             setPumpCount(result);
@@ -70,7 +72,7 @@ export function PumpModuleBody(props : PumpModuleBodyProps){
                         decimals={2}
                         
                         target={{
-                            getter:{url:Pumps.getPumpUrl(props.module.instance,el,"speed"),key:"speed"},
+                            getter:{url:Pumps.getPumpUrl(props.module.instance,el,"speed"),key:"speed",target:reactorApiTarget},
                         }}
                     ></ApiSlider>
                         

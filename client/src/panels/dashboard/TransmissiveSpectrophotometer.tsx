@@ -8,6 +8,7 @@ import { refreshValueUpdate, useRefreshContext } from "../../../lib/web-componen
 import { ValueDisplay } from "../../../lib/web-components/ValueDisplay/ValueDisplay";
 import { Sensor_Spectrophotometer } from "../../../lib/api-messages/sensor/spectrophotometer";
 import { sendApiMessage } from "../../../lib/api-messages/apiMessageBase";
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 
 interface TransSpectrophotometerProps{
     id: string;
@@ -142,7 +143,7 @@ function TransSpectrophotometerBody(
             }}>
                 <Button 
                     callback={async ()=>{
-                        await sendApiMessage({url:"/sensor/spectrophotometer/calibrate",method:"POST",data:"{}"});
+                        await sendApiMessage({url:"/sensor/spectrophotometer/calibrate",method:"POST",data:"{}",target:reactorApiTarget});
                         return true;
                     }}
                     tooltip="Sets the current absolute values as reference for relative"

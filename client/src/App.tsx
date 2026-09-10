@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For, Show, type Accessor, type JSXElement, type Setter } from 'solid-js'
+import { createEffect, createSignal, For, onMount, Show, type Accessor, type JSXElement, type Setter } from 'solid-js'
 import '../lib/web-components/css/colors.css'
 import '../lib/web-components/css/global.css'
 import "./components/Icon/iconFont.css"
@@ -22,6 +22,8 @@ import { ValueDisplay } from '../lib/web-components/ValueDisplay/ValueDisplay'
 import { System } from '../lib/api-messages/system/_'
 import { ModalWindowProvider, useModalWindow } from '../lib/web-components/ModalWindow/ModalWindow'
 import { globalModalWindow } from './components/other/GlobalModalWindow'
+import { smbr_apiMessageConfig } from '../lib/api-messages/apiMessageConfig'
+import { HandleDeviceRestart } from './components/other/DeviceRestartHandler'
 
 type ItemProps = { text: string; iconName: Icons, active: Accessor<string>, onClick?: ()=>void};
 
@@ -147,7 +149,12 @@ function App() {
       { text: "Config", iconName: "build", component: Config },
       { text: "Device", iconName: "terminal", component: Device },
    ];
-   return (
+
+    onMount(() => {
+        smbr_apiMessageConfig.deviceRestartHandler = HandleDeviceRestart;
+    })
+    
+    return (
       <>
          <ModalWindowProvider closeButtonContent={()=>(<Icon class={styles.close_button} name="cancel"></Icon>)}>
             <ModuleListProvider>

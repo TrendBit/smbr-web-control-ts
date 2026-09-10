@@ -6,6 +6,7 @@ import styles from "./LedPanel.module.css"
 import { Button } from "../../../lib/web-components/Button/Button";
 import { sendJsonApiMessage } from "../../../lib/api-messages/apiMessageBase";
 import { For } from "solid-js";
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 
 interface LEDPanelProps{
     id: string;
@@ -29,7 +30,8 @@ export function LEDPanel(props: LEDPanelProps){
                                 await sendJsonApiMessage({
                                     url: "/control/led_panel/intensity",
                                     method: "POST",
-                                    data: "{\"intensity\": [0,0,0,0]}"
+                                    data: "{\"intensity\": [0,0,0,0]}",
+                                    target:reactorApiTarget
                                 })
                                 return true;
                             }}
@@ -54,8 +56,8 @@ export function LEDPanel(props: LEDPanelProps){
                                 decimals={0}
                                 
                                 target={{
-                                    getter:{url:"/control/led_panel/intensity/"+el,key:"intensity"},
-                                    setter:{url:"/control/led_panel/intensity/"+el,key:"intensity"}
+                                    getter:{url:"/control/led_panel/intensity/"+el,key:"intensity",target:reactorApiTarget},
+                                    setter:{url:"/control/led_panel/intensity/"+el,key:"intensity",target:reactorApiTarget}
                                 }}
                             ></ApiSlider>
                         )}

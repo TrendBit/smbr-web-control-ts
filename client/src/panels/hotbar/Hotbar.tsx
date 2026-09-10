@@ -9,6 +9,7 @@ import { ValueDisplay } from '../../../lib/web-components/ValueDisplay/ValueDisp
 import { System } from '../../../lib/api-messages/system/_';
 import { Time } from '../../../lib/api-messages/time/_';
 import { countInstancesOfType, useModuleListValue } from '../../components/other/ModuleListProvider';
+import { reactorApiTarget } from '../../../lib/api-messages/apiMessageConfig';
 
 
 type SimpleDisplayProps = {
@@ -37,7 +38,8 @@ function HostnameDisplay(){
         try {
             let result = await sendApiMessageSimple({
                 url: "/core/hostname", 
-                key: "hostname"
+                key: "hostname",
+                target:reactorApiTarget
             });
             setError(false);
             setValue(result.toString());
@@ -181,8 +183,8 @@ export function Hotbar() {
             </div>      
             <Show when={countInstancesOfType(moduleListCntxt?.state(),"core","Exclusive")}>
                 <HostnameDisplay></HostnameDisplay>
-                <SimpleDisplay name='IP adress' target={{ url: "/core/ip_address", key: "ipAddress" }}></SimpleDisplay>
-                <SimpleDisplay name='short ID' target={{url: "/core/sid", key: "sid"}}></SimpleDisplay>
+                <SimpleDisplay name='IP adress' target={{ url: "/core/ip_address", key: "ipAddress" , target:reactorApiTarget}}></SimpleDisplay>
+                <SimpleDisplay name='short ID' target={{url: "/core/sid", key: "sid", target:reactorApiTarget}}></SimpleDisplay>
             </Show>  
         </>
     )

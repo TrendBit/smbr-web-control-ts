@@ -9,6 +9,7 @@ import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../..
 import { Control_Mixer } from "../../../lib/api-messages/control/mixer"
 
 import styles from "./Control.module.css"
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig"
 
 interface ControlProps{
     id : string
@@ -56,7 +57,7 @@ export function ControlBody(props : ControlBodyProps){
             >
                 <ApiSlider 
                     target={{
-                        getter: {url:"/control/aerator/speed", key:"speed"}
+                        getter: {url:"/control/aerator/speed", key:"speed", target: reactorApiTarget}
                     }}
                     title="Aerator" 
                     direction="H"
@@ -66,7 +67,7 @@ export function ControlBody(props : ControlBodyProps){
                 
                 <ApiSlider
                     target={{
-                        getter: {url:"/control/mixer/speed", key:"speed"}
+                        getter: {url:"/control/mixer/speed", key:"speed", target: reactorApiTarget}
                     }}
                     title="Mixer" 
                     direction="H" 
@@ -76,7 +77,7 @@ export function ControlBody(props : ControlBodyProps){
                 
                 <ApiSlider 
                     target={{
-                        getter: {url:"/control/cuvette_pump/speed", key:"speed"}
+                        getter: {url:"/control/cuvette_pump/speed", key:"speed", target: reactorApiTarget}
                     }}
                     title="Cuvette pump" 
                     direction="H" 
@@ -95,15 +96,15 @@ export function ControlBody(props : ControlBodyProps){
                     min={mixerMinMax()?.min}
                     max={mixerMinMax()?.max}
                     unit="rpm"
-                    getter={{url:"/control/mixer/rpm",key:"rpm"}}
+                    getter={{url:"/control/mixer/rpm",key:"rpm", target: reactorApiTarget}}
                     onClick={async (value : number | undefined)=>{
-                        sendApiMessage({url:"/control/mixer/stop"});
+                        sendApiMessage({url:"/control/mixer/stop", target: reactorApiTarget});
                     }}
                 ></ApiValueController>
 
                 <ApiSlider 
                     target={{
-                        getter: {url:"/control/heater/intensity", key:"intensity"}
+                        getter: {url:"/control/heater/intensity", key:"intensity", target: reactorApiTarget}
                     }}
                     title="Heater" 
                     direction="H" 
@@ -122,9 +123,9 @@ export function ControlBody(props : ControlBodyProps){
                     min={0}
                     max={60}
                     unit="°C"
-                    getter={{url:"/control/heater/target_temperature",key:"temperature"}}
+                    getter={{url:"/control/heater/target_temperature",key:"temperature", target: reactorApiTarget}}
                     onClick={async (value : number | undefined)=>{
-                        sendApiMessage({url:"/control/heater/turn_off"});
+                        sendApiMessage({url:"/control/heater/turn_off", target: reactorApiTarget});
                     }}
                     getValueFunction={async ()=>((await Sensor_Heater.sendGetTarget()).targetTemp)}
                 ></ApiValueController>

@@ -14,6 +14,7 @@ import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../..
 import { TemperatureLogs } from "../../../lib/api-messages/temperature-logs/_"
 import styles from "./Temperature.module.css"
 import { countInstancesOfType, getInstancesForType, useModuleListValue } from "../../components/other/ModuleListProvider"
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig"
 // create subrows by setting icon as undefined
 // row indexes are then given automatically after generating the array
 type row = {
@@ -179,7 +180,8 @@ export function TemperatureBody(props : TemperatureBodyProps) {
                 <ApiFetcher 
                     target={{
                         url: nameToEndpoint[data.name],
-                        key: data.targetkey ?? "temperature"
+                        key: data.targetkey ?? "temperature",
+                        target:reactorApiTarget
                     }} 
                     unit="°C" 
                     numberOnly={{
