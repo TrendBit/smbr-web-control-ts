@@ -11,10 +11,11 @@ import { System } from "../../../lib/api-messages/system/_";
 import { sleep } from "../../../lib/web-components/other/utils";
 import { getModuleEndpoint } from "../../../lib/api-messages/utils";
 import { useModuleListValue } from "../../components/other/ModuleListProvider";
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 
 
 async function restartModule(module: Module){
-    await sendApiMessageSimplePost({url:getModuleEndpoint(module,"/restart"),key:"uid"},module.uid);
+    await sendApiMessageSimplePost({url:getModuleEndpoint(module,"/restart"),key:"uid",target:reactorApiTarget},module.uid);
     await sleep(3000);
     return true
 }
@@ -28,17 +29,17 @@ function renderRow(value : Module, index: number){
         <p>{value.instance}</p>,
         <ApiFetcher
             numberOnly={{decimalPlaces: 2}}
-            target={{url: getModuleEndpoint(value,"/ping") ,key: "time_ms"}}
+            target={{url: getModuleEndpoint(value,"/ping") ,key: "time_ms", target:reactorApiTarget}}
             unit="ms"
         ></ApiFetcher>,
         <ApiFetcher
             numberOnly={{decimalPlaces: 2}}
-            target={{url: getModuleEndpoint(value,"/core_temp") ,key: "temperature"}}
+            target={{url: getModuleEndpoint(value,"/core_temp") ,key: "temperature", target:reactorApiTarget}}
             unit="°C"
         ></ApiFetcher>,
         <ApiFetcher
             numberOnly={{decimalPlaces: 2}}
-            target={{url: getModuleEndpoint(value,"/board_temp") ,key: "temperature"}}
+            target={{url: getModuleEndpoint(value,"/board_temp") ,key: "temperature", target:reactorApiTarget}}
             unit="°C"
         ></ApiFetcher>,
         <ApiFetcher
@@ -46,17 +47,17 @@ function renderRow(value : Module, index: number){
                 decimalPlaces: 2,
                 resultModifier: (value:number)=>(value*100)
             }}
-            target={{url: getModuleEndpoint(value,"/load") ,key: "load"}}
+            target={{url: getModuleEndpoint(value,"/load") ,key: "load", target:reactorApiTarget}}
             unit="%"
         ></ApiFetcher>,
         <span style={{"justify-content":"space-evenly"}}>
             <ApiFetcher
-                target={{url: getModuleEndpoint(value,"/fw_version") ,key: "version"}}
+                target={{url: getModuleEndpoint(value,"/fw_version") ,key: "version", target:reactorApiTarget}}
             ></ApiFetcher>
             <span style={{ "padding-left": "5px", display: "flex", "align-items": "center"}}>
                 <span>(</span>
                 <ApiFetcher
-                    target={{url: getModuleEndpoint(value,"/hw_version") ,key: "version"}}
+                    target={{url: getModuleEndpoint(value,"/hw_version") ,key: "version", target:reactorApiTarget}}
                 ></ApiFetcher>
                 <span>)</span>
             </span>

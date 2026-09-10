@@ -2,7 +2,7 @@ import { createSignal, onMount, Show, type JSXElement } from "solid-js"
 import { useModalWindow } from "../../../lib/web-components/ModalWindow/ModalWindow"
 import { LoadingDots } from "../../../lib/web-components/LoadingDots/loadingDots"
 import { sendApiMessage, sendJsonApiMessage } from "../../../lib/api-messages/apiMessageBase"
-import { smbr_apiMessageConfig } from "../../../lib/api-messages/apiMessageConfig"
+import { reactorApiTarget, smbr_apiMessageConfig, webControlApiTarget } from "../../../lib/api-messages/apiMessageConfig"
 import { sleep } from "../../../lib/web-components/other/utils"
 import { globalModalWindow } from "./GlobalModalWindow"
 import { mainUpdaterDisabled } from "../../App"
@@ -79,7 +79,7 @@ function ModalPopup(changes: Changes) {
         mainUpdaterDisabled.set(true)
 
         let deviceIsDown = true
-        targetHostname = smbr_apiMessageConfig.defaultHostnames.reactorApi
+        targetHostname = reactorApiTarget.hostname
 
         await sleep(3000)
 
@@ -92,8 +92,8 @@ function ModalPopup(changes: Changes) {
                     console.log("sending probe to device")
                     await sendJsonApiMessage({
                         url: "/system/modules",
-                        hostname: targetHostname,
-                        timeout: 1000
+                        timeout: 1000,
+                        target: reactorApiTarget
                     })
                     console.log("device still up")
                 } catch (e) {
@@ -117,7 +117,8 @@ function ModalPopup(changes: Changes) {
                 await sendJsonApiMessage({
                     url: "/system/modules",
                     hostname: targetHostname,
-                    timeout: 1000
+                    timeout: 1000,
+                    target: reactorApiTarget
                 })
                 console.log("device finished restarting!!")
                 deviceIsDown = false;
@@ -129,8 +130,8 @@ function ModalPopup(changes: Changes) {
         globalModalWindow.cntxt?.closeButton.set(true)
 
         if (changes.hostname) {
-            smbr_apiMessageConfig.defaultHostnames.reactorApi = targetHostname;
-            smbr_apiMessageConfig.defaultHostnames.webControlApi = targetHostname;
+            reactorApiTarget.hostname = targetHostname;
+            webControlApiTarget.hostname = targetHostname;
             setCurrPage("completed restart")
         }
 

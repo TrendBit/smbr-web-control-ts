@@ -8,7 +8,7 @@ import textEditorStyles from "./TextEditor.module.css"
 import { Button } from "../../../../lib/web-components/Button/Button";
 import { Icon } from "../../../components/Icon/Icon";
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../../lib/web-components/other/RefreshProvider";
-import { ApiInvalidStatusCodeError, type targetsType } from "../../../../lib/api-messages/apiMessageBase";
+import { ApiInvalidStatusCodeError, type apiTarget } from "../../../../lib/api-messages/apiMessageBase";
 import { parseApiMessageFileList, sendApiMessageDeleteFile, sendApiMessageGetFileContent, sendApiMessageGetFileList, sendApiMessageSetFileContent, type apiMessageGetFileContentResult, type FileListDirectory } from "../../../../lib/api-messages/apiMessageFileOperations";
 import { Scheduler } from "../../../../lib/api-messages/scheduler/_";
 import { AutoScrollerP } from "../../../../lib/web-components/AutoScroller/AutoScroller";
@@ -627,7 +627,7 @@ interface TextEditorProps {
   allowFileDeletion? : boolean;
 
   targetEndpoint: string;
-  target?: targetsType
+  target: apiTarget
 }
 
 export function TextEditor(props : TextEditorProps) {

@@ -6,6 +6,7 @@ import { ApiFetcher } from "../../components/ApiFetcher/ApiFetcher"
 import type { apiMessageSimple } from "../../../lib/api-messages/apiMessageSimple"
 import { Button } from "../../../lib/web-components/Button/Button"
 import { useModalWindow } from "../../../lib/web-components/ModalWindow/ModalWindow"
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig"
 
 interface CanStatisticsProps{
     id:string
@@ -35,31 +36,31 @@ export function CanStatistics(props:CanStatisticsProps){
     const [rows,setRows] = createSignal<row[]>([
        {
             label: "RX packets",
-            value: { url: "/system/can/rx_packets", key: "rx_packets" },
+            value: { url: "/system/can/rx_packets", key: "rx_packets", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "TX packets",
-            value: { url: "/system/can/tx_packets", key: "tx_packets" },
+            value: { url: "/system/can/tx_packets", key: "tx_packets", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "RX errors",
-            value: { url: "/system/can/rx_errors", key: "rx_errors" },
+            value: { url: "/system/can/rx_errors", key: "rx_errors", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "TX errors",
-            value: { url: "/system/can/tx_errors", key: "tx_errors" },
+            value: { url: "/system/can/tx_errors", key: "tx_errors", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "RX dropped",
-            value: { url: "/system/can/rx_dropped", key: "rx_dropped" },
+            value: { url: "/system/can/rx_dropped", key: "rx_dropped", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "TX dropped",
-            value: { url: "/system/can/tx_dropped", key: "tx_dropped" },
+            value: { url: "/system/can/tx_dropped", key: "tx_dropped", target:reactorApiTarget},
             decimalPlaces: 0
         },{
             label: "collisions",
-            value: { url: "/system/can/collisions", key: "collisions" },
+            value: { url: "/system/can/collisions", key: "collisions", target:reactorApiTarget},
             decimalPlaces: 0
         }
     ])

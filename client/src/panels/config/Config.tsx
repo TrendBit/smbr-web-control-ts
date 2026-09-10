@@ -1,3 +1,4 @@
+import { webControlApiTarget } from "../../../lib/api-messages/apiMessageConfig";
 import { TextEditor } from "../common/TextEditor/TextEditor";
 
 export function Config(){
@@ -5,7 +6,7 @@ export function Config(){
         <TextEditor 
             twoColFileList={true}
             targetEndpoint="/config-files"
-            target="webControlApi"
+            target={webControlApiTarget}
             allowFileCreation={false}
             allowFileDeletion={false}
         ></TextEditor>

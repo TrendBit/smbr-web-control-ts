@@ -11,6 +11,7 @@ import styles from "./DeviceInformation.module.css"
 import { System } from "../../../lib/api-messages/system/_"
 import { Services } from "../../../lib/api-messages/services/_"
 import { LoadingDots } from "../../../lib/web-components/LoadingDots/loadingDots"
+import { reactorApiTarget } from "../../../lib/api-messages/apiMessageConfig"
 
 interface DeviceInformationProps{
     id:string
@@ -91,45 +92,45 @@ export function DeviceInformation(props:DeviceInformationProps){
     const [rows,setRows] = createSignal<row[]>([
        {
             label: "SID",
-            value: { url: "/core/sid", key: "sid" }
+            value: { url: "/core/sid", key: "sid", target:reactorApiTarget}
         },{
             label: "IP address",
-            value: { url: "/core/ip_address", key: "ipAddress" }
+            value: { url: "/core/ip_address", key: "ipAddress", target:reactorApiTarget}
         },{
             label: "Hostname",
-            value: { url: "/core/hostname", key: "hostname" },
+            value: { url: "/core/hostname", key: "hostname", target:reactorApiTarget},
             prefix: HostnameEditor
         }, {
             label: "Serial number",
-            value: { url: "/core/serial", key: "serial" }
+            value: { url: "/core/serial", key: "serial", target:reactorApiTarget}
         },{
             label: "Supply voltage",
-            value: { url: "/core/supply/5v", key: "voltage" },
+            value: { url: "/core/supply/5v", key: "voltage", target:reactorApiTarget},
             unit: "V",
             numberOnly: true
         },{
             label: "Supply vin",
-            value: { url: "/core/supply/vin", key: "voltage" },
+            value: { url: "/core/supply/vin", key: "voltage", target:reactorApiTarget},
             unit: "V",
             numberOnly: true
         },{
             label: "Supply poe",
-            value: { url: "/core/supply/poe", key: "voltage" },
+            value: { url: "/core/supply/poe", key: "voltage", target:reactorApiTarget},
             unit: "V",
             numberOnly: true
         },{
             label: "Supply current",
-            value: { url: "/core/supply/current", key: "current" },
+            value: { url: "/core/supply/current", key: "current", target:reactorApiTarget},
             unit: "A",
             numberOnly: true
         },{
             label: "Supply power_draw",
-            value: { url: "/core/supply/power_draw", key: "power_draw" },
+            value: { url: "/core/supply/power_draw", key: "power_draw", target:reactorApiTarget},
             unit: "W",
             numberOnly: true
         },{
             label: "System version",
-            value: { url: "/system/version", key: "version" },
+            value: { url: "/system/version", key: "version", target:reactorApiTarget},
         }
     ])
     const [error, setError] = createSignal<string | undefined>();
