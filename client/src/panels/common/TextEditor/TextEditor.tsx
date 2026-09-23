@@ -12,7 +12,7 @@ import { ApiInvalidStatusCodeError, type apiTarget } from "../../../../lib/api-m
 import { parseApiMessageFileList, sendApiMessageDeleteFile, sendApiMessageGetFileContent, sendApiMessageGetFileList, sendApiMessageSetFileContent, type apiMessageGetFileContentResult, type FileListDirectory } from "../../../../lib/api-messages/apiMessageFileOperations";
 import { Scheduler } from "../../../../lib/api-messages/scheduler/_";
 import { AutoScrollerP } from "../../../../lib/web-components/AutoScroller/AutoScroller";
-import { PopupPanel, type Popup } from "../Widget";
+import { PopupPanel, type Popup } from "../../../../lib/web-components/PopupPanel/PopupPanel";
 
 
 

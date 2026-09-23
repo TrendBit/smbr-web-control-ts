@@ -2,7 +2,7 @@ import { createEffect, createSignal, For } from "solid-js";
 import { Button } from "../../../lib/web-components/Button/Button";
 import { GridElement } from "../../components/GridstackGrid/GridstackGrid"
 import { Icon } from "../../components/Icon/Icon";
-import { type Popup, Widget } from "../common/Widget";
+import { Widget } from "../common/Widget";
 
 import styles from "./QuickLaunch.module.css"
 import { RefreshProvider, refreshValueUpdate, useRefreshContext } from "../../../lib/web-components/other/RefreshProvider";
@@ -10,6 +10,7 @@ import { Recipes } from "../../../lib/api-messages/recipes/_";
 import { Scheduler } from "../../../lib/api-messages/scheduler/_";
 import { sleep } from "../../../lib/web-components/other/utils";
 import { ApiInvalidStatusCodeError } from "../../../lib/api-messages/apiMessageBase";
+import type { Popup } from "../../../lib/web-components/PopupPanel/PopupPanel";
 
 interface QuickLaunchProps{
     id: string;
