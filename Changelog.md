@@ -1,6 +1,10 @@
 # Changelog SMBR Web Control TS
 This version number is trying to stick to the __MAJOR__.__MINOR__ identifiers but there are some exceptions (marked with a prefix # in the MINOR part).
 
+# 1.2.1
+- large internal code changes, cleanup and modularization
+- no changes to functionality
+
 # 1.2.0
 - added version to modules in module list
 - added system version to device info
